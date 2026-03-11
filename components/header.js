@@ -1,5 +1,6 @@
 'use client'
 import React,{useState,useEffect} from 'react'
+
 import Image from 'next/image';
 import { 
   
@@ -57,7 +58,7 @@ function Header() {
             <nav className="hidden lg:flex items-center gap-6 mr-4 text-sm font-semibold text-slate-400">
               <a href="#" className="hover:text-white transition-colors">Products</a>
               <a href="#" className="hover:text-white transition-colors">Deals</a>
-              <a href="#" className="hover:text-white transition-colors">Support</a>
+              <a href="/support" className="hover:text-white transition-colors">Support</a>
             </nav>
 
             <div className="flex items-center gap-1">
@@ -73,11 +74,11 @@ function Header() {
                 </span>
               </button>
 
-              <button className="hidden sm:flex p-1 hover:bg-white/5 rounded-full border border-transparent hover:border-white/10 transition-all ml-2">
+              <a className="hidden sm:flex p-1 hover:bg-white/5 rounded-full border border-transparent hover:border-white/10 transition-all ml-2" href='/dashboard'>
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center border border-white/20">
                   <User className="w-4 h-4 text-slate-300" />
                 </div>
-              </button>
+              </a>
 
               {/* Mobile Menu Toggle */}
               <button 
