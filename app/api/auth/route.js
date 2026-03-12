@@ -23,7 +23,7 @@ export async function POST(req, res, next) {
         secure: true,
         sameSite: "strict",
         path: "/",
-        maxAge: 60 * 60 * 24* 7, // 1 day
+        maxAge: 60 * 60 * 24* 7, 
     });
 
     return response;
@@ -34,6 +34,7 @@ export async function GET(req, res, next) {
     const { searchParams } = new URL(req.url)
     const email = searchParams.get("email");
     const password = searchParams.get("password");
+    console.log(email,password);
     const client = await connectPromise;
     const db = client.db("TrendyCrafts");
     const user = db.collection("Users");
@@ -43,14 +44,12 @@ export async function GET(req, res, next) {
     const token = await generateToken(email);
 
     const response = NextResponse.json({ success: true });
-
-    
     response.cookies.set("token", token, {
         httpOnly: true,
         secure: true,
         sameSite: "strict",
         path: "/",
-        maxAge: 60 * 60 * 24 * 7, // 1 day
+        maxAge: 60 * 60 * 24 * 7, 
     });
 
     return response;

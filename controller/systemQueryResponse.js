@@ -5,7 +5,7 @@ export async function sendMail(gmail) {
     try {
         transporter.sendMail({
             to: gmail,
-            from: "trendycarfts@gmail.com",
+            from: process.env.SYSTEM_MAIL,
             text: "Thank you for reaching out us.",
             subject:"Thank you for reaching out us.",
             html: `<!DOCTYPE html>
