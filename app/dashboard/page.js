@@ -1,7 +1,7 @@
 "use client"
 
 import { icons } from "lucide-react";
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 
 const sidebarLinks = [
   {icon:"🏠",label:"Home",id:"home",ref:"/"},
@@ -42,7 +42,9 @@ const stats = [
 export default function Dashboard() {
   const [active, setActive] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(true);
-
+  useEffect(()=>{
+    console.log("dashboard");
+  },[])
   return (
     <div
       className="min-h-screen bg-[#04050e] text-white flex"
