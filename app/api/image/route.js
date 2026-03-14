@@ -5,7 +5,5 @@ export async function GET(req) {
     const db=client.db("TrendyCrafts")
     const collection=db.collection("Products");
     const data = await collection.find({}).toArray();
-    // const originalData= await data.json();
-    // console.log(data)
     return NextResponse.json({msg:"data fetched",data:data});
 }

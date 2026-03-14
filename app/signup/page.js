@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Alert } from "@/components/alert.js";
 import { useAlert } from "@/hooks/useAlert";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 export default function SignupPage() {
   const route=useRouter();
   const { alerts, fire, dismiss } = useAlert();
@@ -278,7 +278,7 @@ export default function SignupPage() {
 
                 <p className="text-center text-xs text-gray-600 mt-4">
                   Already have an account?{" "}
-                  <button className="text-purple-400 hover:text-purple-300 font-medium transition-colors">Sign in →</button>
+                  <button className="text-purple-400 hover:text-purple-300 font-medium transition-colors" onClick={()=>redirect("/login")}>Sign in →</button>
                 </p>
               </>
             ) : (
