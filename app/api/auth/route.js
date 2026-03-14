@@ -6,17 +6,16 @@ import bcrypt from 'bcrypt'
 
 export async function POST(req, res, next) {
     const body = await req.json();
-    const { userName, email, password } = body;
+    const { name, email, password ,gender,phone} = body;
     // console.log(req);
     try {
         const isAlraedySignedUp = await sql`select * from "User" where email=${email}`
         // console.log(isAlraedySignedUp)
-        if (isAlraedySignedUp.length != 0) return NextResponse.json({ msg: "user already exsists" })
+        if (isAlraedySignedUp.length != 0) return NextResponse.json({ msg: "User already exsists" })
         const hashedPassword = await bcrypt.hash(password, 10);
-        await sql`insert into "User" ("email","password","name") values (${email},${hashedPassword},${userName})`
+        await sql`insert into "User" ("email","password","name","gender","phone") values (${email},${hashedPassword},${name},${gender},${phone})`
         const token = await generateToken(email);
-        const response = NextResponse.json({ success: true });
-
+        const response = NextResponse.json({ success: true,msg:"Account Created." });
 
         response.cookies.set("token", token, {
             httpOnly: true,
