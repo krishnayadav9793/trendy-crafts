@@ -31,11 +31,7 @@ const statusColors = {
   Processing: { bg: "bg-amber-500/10",   text: "text-amber-400",   dot: "bg-amber-400"   },
 };
 
-const stats = [
-  { label: "Total Orders", value: "24",     change: "+3 this month",    icon: "📦", color: "from-violet-600/20 to-purple-900/10" },
-  { label: "Total Spent",  value: "₹4,820", change: "+₹899 this month", icon: "💰", color: "from-fuchsia-600/20 to-pink-900/10"  },
-  { label: "Wishlist",     value: "7",      change: "2 on sale now",    icon: "♡",  color: "from-rose-600/20 to-red-900/10"      },
-];
+
 
 export default function Dashboard() {
   const [active,       setActive]       = useState("dashboard");
@@ -43,8 +39,13 @@ export default function Dashboard() {
   const [mobileOpen,   setMobileOpen]   = useState(false);  // mobile drawer open
   const [wishing,      setWishing]      = useState("");
   const [time,         setTime]         = useState(new Date());
-  const [User,         setUser]         = useState({ name: "" });
-
+  const [User,         setUser]         = useState({ name: "" ,email:""});
+  const [order,        setOrder]        = useState([]);
+  const stats = [
+  { label: "Total Orders", value: order.length,     change: "",    icon: "📦", color: "from-violet-600/20 to-purple-900/10" },
+  { label: "Total Spent",  value: "₹4,820", change: "+₹899 this month", icon: "💰", color: "from-fuchsia-600/20 to-pink-900/10"  },
+  { label: "Wishlist",     value: "7",      change: "2 on sale now",    icon: "♡",  color: "from-rose-600/20 to-red-900/10"      },
+];
   // Greeting
   useEffect(() => {
     const h = time.getHours();
@@ -62,7 +63,11 @@ export default function Dashboard() {
           credentials: "include",
           headers: { "Content-Type": "application/json" },
         });
-        const { data } = await res.json();
+        const  dataRes  = await res.json();
+        const {data}=dataRes;
+        // console.log(data);
+        // console.log(dataRes.order);
+        setOrder(dataRes.order);
         setUser(data);
       } catch (e) {
         console.error(e);
@@ -80,7 +85,7 @@ export default function Dashboard() {
 
   const initial = User.name?.[0]?.toUpperCase() ?? "?";
 
-  // ── Shared sidebar nav content ─────────────────────────────────────────────
+  
   const SidebarContent = ({ collapsed }) => (
     <>
       {/* Logo */}

@@ -80,6 +80,7 @@ export default function PulseLoader({
     const v = VARIANTS[variant];
     const half = s.core / 2;
     const stagger = speed / (1000 * 3); // seconds between rings
+    const isLogo = icon === "logo";
 
     const ringStyle = (delay) => ({
         position: "absolute",
@@ -132,12 +133,13 @@ export default function PulseLoader({
                     zIndex: 2,
                     width: s.core,
                     height: s.core,
-                    borderRadius: square ? `${s.core * 0.27}px` : "50%",
-                    background: v.core,
+                    borderRadius: "50%",
+                    // No background or glow when showing logo
+                    background: isLogo ? "transparent" : v.core,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    boxShadow: v.glow,
+                    boxShadow: isLogo ? "none" : v.glow,
                     animation: `tcCorePulse ${speed}ms ease-in-out infinite`,
                 }}>
                     <CoreIcon size={s.core} icon={icon} />

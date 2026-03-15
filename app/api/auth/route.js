@@ -13,8 +13,8 @@ export async function POST(req, res, next) {
         // console.log(isAlraedySignedUp)
         if (isAlraedySignedUp.length != 0) return NextResponse.json({ msg: "User already exsists" })
         const hashedPassword = await bcrypt.hash(password, 10);
-        await sql`insert into "User" ("email","password","name","gender","phone") values (${email},${hashedPassword},${name},${gender},${phone})`
-        const token = await generateToken(email);
+        const id=await sql`insert into "User" ("email","password","name","gender","phone") values (${email},${hashedPassword},${name},${gender},${phone}) RETURNING id`
+        const token = await generateToken(id);
         const response = NextResponse.json({ success: true,msg:"Account Created." });
 
         response.cookies.set("token", token, {
@@ -44,7 +44,8 @@ export async function GET(req, res, next) {
     if (userData.length ==0) return NextResponse.json({ msg: "No user record found" });
     const isCorrectPassword=bcrypt.compare(userData[0].password,password);
     if (!isCorrectPassword) return NextResponse.json({ msg: "Wrong password" });
-    const token = await generateToken(email);
+    
+    const token = await generateToken(userData[0].id);
 
     const response = NextResponse.json({ success: true });
     response.cookies.set("token", token, {

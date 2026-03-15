@@ -39,13 +39,13 @@ function Header() {
           className="flex items-center gap-2 group cursor-pointer flex-shrink-0"
           onClick={() => router.push("/")}
         >
-          <div className="w-8 h-8 bg-gradient-to-tr from-purple-600 to-blue-500 rounded-lg flex items-center justify-center shadow-lg shadow-purple-500/20 group-hover:rotate-12 transition-transform overflow-hidden">
+          <div className="w-8 h-8  rounded-lg flex items-center justify-center shadow-lg shadow-purple-500/20 group-hover:rotate-12 transition-transform overflow-hidden">
             <Image
               src="https://res.cloudinary.com/dz6h1ksg1/image/upload/v1772383600/555077461_17907845199244243_6534801052402177053_n_osh5we.jpg"
               width={32}
               height={32}
               alt="trendy-crafts"
-              className="rounded-lg object-cover"
+              className="rounded-[50%] object-cover"
             />
           </div>
           <span className="text-xl font-black tracking-tighter text-white hidden sm:block">
